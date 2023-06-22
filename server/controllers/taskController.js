@@ -84,8 +84,65 @@ const addTask = async(req, res, next) => {
     }
 }
 
+const updateTask = async (req, res, next) => {
+  validatorErrorHandler(req, res);
+  try {
+    const taskId = req.params.id; 
+
+    const updatedTask = new Task(
+      taskId,
+      req.body.name,
+      req.body.description,
+      new Date(),
+      new Date(),
+      req.body.status
+    ).toJSON();
+
+    const [result] = await connection.query(
+      'UPDATE task SET ? WHERE id = ?',
+      [updatedTask, taskId]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(400).json({
+        message: 'Unable to update task, please check the provided task ID',
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Task updated successfully',
+      data: {
+        task: updatedTask,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const deleteTask = async (req, res, next) => {
+  try {
+    const taskId = req.params.id; 
+
+    const [result] = await connection.query('DELETE FROM task WHERE id = ?', [taskId]);
+
+    if (result.affectedRows === 0) {
+      return res.status(400).json({
+        message: 'Unable to delete task, please check the provided task ID',
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Task deleted successfully',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 
 
 
-module.exports = {getTasks, getTask, addTask}
+
+
+module.exports = {getTasks, getTask, addTask, updateTask, deleteTask}
