@@ -5,7 +5,7 @@ async function createTaskTable() {
   try {
     await connection.query("DROP TABLE IF EXISTS tasks");
     await connection.query(`
-        CREATE TABLE IF NOT EXISTS tasks (
+        CREATE TABLE IF NOT EXISTS task (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         description TEXT NOT NULL,
