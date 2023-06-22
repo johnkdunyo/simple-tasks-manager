@@ -8,6 +8,7 @@ CONTAINER_NAME="task-manager-container"
 MYSQL_ROOT_PASSWORD="$DB_PASSWORD"
 DB_NAME="$DB_NAME"
 DB_USER="$DB_USER"
+DB_PORT="$DB_PORT"
 
 
 echo $DB_USER
@@ -33,10 +34,10 @@ docker run \
   --rm --name $CONTAINER_NAME -d \
   -e="MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD" \
   -e="MYSQL_DATABASE=$DB_NAME" \
-  -p 3309:3306 \
+  -p $DB_PORT:3306 \
   -v=$DIR:/var/lib/mysql \
   --platform linux/x86_64 \
   mysql:8.0.30 \
   --default-authentication-plugin=caching_sha2_password
 
-echo "MySQL Docker container '$CONTAINER_NAME' has been started."
+echo "MySQL Docker container '$CONTAINER_NAME' has been started on port '$DB_PORT'"
