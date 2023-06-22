@@ -1,15 +1,35 @@
 const express = require('express');
+require('dotenv').config();
+const cors = require('cors')
+const routes = require("./routes/routes")
 
 const app = express()
 
-//defaut route
-app.get('/', (req, res) => {
+app.use(cors())
+app.use(express.json());
+
+
+//default route
+app.get('/api', (req, res) => {
     res.json({message: 'Welcome dude'})
 });
 
+// register all routes
+app.use("/api", routes)
 
 
-const port = process.env.PORT || 6000;
+// default to 500
+app.use((err, req, res, next) => {
+    console.log(err);
+    err.statusCode = err.statusCode || 500;
+    err.message = err.message || "Internal Server Error";
+    res.status(err.statusCode).json({
+      message: err.message,
+    });
+});
+
+
+const port = process.env.SERVER_PORT || 6000;
 const host = '0.0.0.0';
 
 
