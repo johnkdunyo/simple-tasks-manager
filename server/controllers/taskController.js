@@ -27,5 +27,32 @@ const getTasks = async(req, res, next) => {
 
 
 
+const getTask = async(req, res, next) => {
+    console.log(req.params.id)
+    try {
+         const [result] = await connection.query(
+            'SELECT * FROM task WHERE id = ?', [req.params.id]
+        )
 
-module.exports = {getTasks}
+         if(result.length === 0) {
+            return res.status(400).json({
+                message: "No task found for the id passed"
+            })
+        }
+
+        return res.status(200).json({
+            message: "success",
+            data: {
+                task: result
+            }
+        })
+    } catch (error) {
+        next(error) 
+    }
+}
+
+
+
+
+
+module.exports = {getTasks, getTask}

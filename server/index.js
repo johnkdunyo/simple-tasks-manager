@@ -18,6 +18,15 @@ app.get('/api', (req, res) => {
 app.use("/api", routes)
 
 
+// default to 500 if not able to catch
+app.use((err, req, res, next) => {
+    console.log(err);
+    err.statusCode = err.statusCode || 500;
+    err.message = err.message || "Internal Server Error";
+    res.status(err.statusCode).json({
+      message: err.message,
+    });
+});
 
 
 

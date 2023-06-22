@@ -3,9 +3,10 @@ const router = express.Router()
 
 
 
-const { getTasks } = require("../controllers/taskController");
+const { getTasks, getTask } = require("../controllers/taskController");
 
 router.get('/task', getTasks);
+router.get('/task/:id', getTask)
 
 
 
