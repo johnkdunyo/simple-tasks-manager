@@ -34,7 +34,7 @@ async function seedTaskData() {
   console.log(newTask)
 
   try {
-    const [result] = await connection.query("INSERT INTO tasks SET ?", newTask);
+    const [result] = await connection.query("INSERT INTO task SET ?", newTask);
 
    
 

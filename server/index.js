@@ -1,16 +1,23 @@
 const express = require('express');
 require('dotenv').config();
 const cors = require('cors')
-const connection = require("./config/dbconfig")
+const routes = require("./routes/routes")
 
 const app = express()
+
 app.use(cors())
 app.use(express.json());
 
-//defaut route
+
+//default route
 app.get('/api', (req, res) => {
     res.json({message: 'Welcome dude'})
 });
+
+// register all routes
+app.use("/api", routes)
+
+
 
 
 

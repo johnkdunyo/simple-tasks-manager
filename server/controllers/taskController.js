@@ -1,8 +1,8 @@
 const connection = require("../config/dbconfig").promise()
 
 
-exports.getTasks = async(req, res, next) => {
-    // todo ; validation of req body
+
+const getTasks = async(req, res, next) => {
     try {
         const [result] = await connection.query(
             'SELECT * FROM task'
@@ -24,3 +24,8 @@ exports.getTasks = async(req, res, next) => {
         next(error)
     }
 }
+
+
+
+
+module.exports = {getTasks}
