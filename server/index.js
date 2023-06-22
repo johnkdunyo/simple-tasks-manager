@@ -7,13 +7,13 @@ app.use(cors())
 app.use(express.json());
 
 //defaut route
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     res.json({message: 'Welcome dude'})
 });
 
 
 
-const port = process.env.PORT || 6000;
+const port = process.env.SERVER_PORT || 6000;
 const host = '0.0.0.0';
 
 
