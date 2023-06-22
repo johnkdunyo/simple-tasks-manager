@@ -18,7 +18,7 @@ app.get('/api', (req, res) => {
 app.use("/api", routes)
 
 
-// default to 500 if not able to catch
+// default to 500
 app.use((err, req, res, next) => {
     console.log(err);
     err.statusCode = err.statusCode || 500;
@@ -27,7 +27,6 @@ app.use((err, req, res, next) => {
       message: err.message,
     });
 });
-
 
 
 const port = process.env.SERVER_PORT || 6000;
