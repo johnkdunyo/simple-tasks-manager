@@ -33,37 +33,44 @@ class Task {
     return this._status;
   }
 
-  getTask() {
-    return {
-      id: this.id,
-      name: this.name,
-      description: this.description,
-      createdAt: this.createdAt,
-      updatedAt: this.updatedAt,
-      status: this.status
-    }
-  }
-
   // Setters
-  set name(newName) {
-    this._name = newName;
+  set id(value) {
+    this._id = value;
   }
 
-  set description(newDescription) {
-    this._description = newDescription;
+  set name(value) {
+    this._name = value;
   }
 
-  set createdAt(newCreatedAt) {
-    this._createdAt = newCreatedAt;
+  set description(value) {
+    this._description = value;
   }
 
-  set updatedAt(newUpdatedAt) {
-    this._updatedAt = newUpdatedAt;
+  set createdAt(value) {
+    this._createdAt = value;
   }
 
-  set status(newStatus) {
-    this._status = newStatus;
+  set updatedAt(value) {
+    this._updatedAt = value;
+  }
+
+  set status(value) {
+    this._status = value;
+  }
+
+
+  toJSON() {
+    return {
+      id: this._id,
+      name: this._name,
+      description: this._description,
+      createdAt: this._createdAt,
+      updatedAt: this._updatedAt,
+      status: this._status
+    };
   }
 }
 
-module.exports = Task;
+
+
+module.exports = Task
