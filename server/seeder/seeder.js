@@ -3,8 +3,8 @@ const Task = require("../models/Task");
 
 async function createTaskTable() {
   try {
-    
-   await connection.query(`
+    await connection.query("DROP TABLE IF EXISTS tasks");
+    await connection.query(`
         CREATE TABLE IF NOT EXISTS tasks (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
@@ -36,10 +36,10 @@ async function seedTaskData() {
   try {
     const [result] = await connection.query("INSERT INTO tasks SET ?", newTask);
 
-    console.log(result)
+   
 
     if (result.affectedRows === 1) {
-      console.log("Task data seeded successfully.");
+      console.info("Task data seeded successfully.");
     } else {
       console.error("Failed to seed task data.");
     }
